@@ -1,7 +1,8 @@
 function LeanSlideshow() {
   var d = document,
       slides = d.getElementsByTagName('article'),
-      current = window.location.href.match(/#\d+$/);
+      current = window.location.href.match(/#\d+$/),
+      old_orientatnion, orientatnion, wait_for_event=false;
 
       if(current){
         current = Number(current[0].replace('#',''))-1;
@@ -18,13 +19,22 @@ function LeanSlideshow() {
       function refreshClasses(){
         var current_class = slides[current].classList;
 
-        for(var i = 0; i < current - 1; i++) {
-            slides[i].classList.add('before-prev');
+        for(var i = 0; i < slides.length; i++) {
+          var classList = slides[i].classList;
+
+          classList.remove('prev');
+          classList.remove('next');
+          classList.remove('current');
+
+          if (i < current - 1){
+            classList.add('before-prev');
+            classList.remove('after-next');
+          } else if (i > current + 1) {
+            classList.add('after-next');
+            classList.remove('before-prev');
+          }
         }
 
-        for(var i = current + 1; i < slides.length; i++) {
-            slides[i].classList.add('after-next');
-        }
 
         if (current > 0){
         var prev_class = slides[current - 1].classList;
@@ -45,24 +55,59 @@ function LeanSlideshow() {
         current_class.remove('prev');
       }
 
+      function previousSlide() {
+        if (current > 0) {
+          window.location.href = window.location.href.replace('#'+(current+1), '#'+(--current+1));
+          refreshClasses();
+        }
+      }
+
+      function nextSlide() {
+        if (current < slides.length-1) {
+          window.location.href = window.location.href.replace('#'+(current+1), '#'+(++current+1));
+          refreshClasses();
+        }
+      }
+
       function keyupHandler(e){
         switch(e.keyCode) {
           case 37:
-            if (current > 0) {
-              window.location.href = window.location.href.replace('#'+(current+1), '#'+(--current+1));
-              refreshClasses();
-            }
+            previousSlide();
             break;
           case 39:
-            if (current < slides.length-1) {
-              window.location.href = window.location.href.replace('#'+(current+1), '#'+(++current+1));
-              refreshClasses();
-            }
+            nextSlide();
+            break;
+
+          case 38:
+            for (var i = 0; i < slides.length; i++) {
+              slides[i].classList.add('current');
+            };
+            break;
+          case 40:
+            refreshClasses();
             break;
         }
       }
 
+      function orientationHandler(e) {
+        orientatnion = Math.floor(e.gamma);
+        if(wait_for_event == false && (orientatnion > 5 || orientatnion < -5)) {
+          old_orientatnion = orientatnion;
+          wait_for_event = true;
+          setTimeout(function(){
+            if(orientatnion > 5 && old_orientatnion >= orientatnion) {
+              nextSlide();
+            } else if(orientatnion < 5 && old_orientatnion <= orientatnion) {
+              previousSlide();
+            }
+            console.log('event:');
+            wait_for_event = false;
+          },300);
+        }
+      }
+
       document.addEventListener('keyup', keyupHandler);
+      window.addEventListener('deviceorientation', orientationHandler);
 }
 
 window.addEventListener('load', LeanSlideshow);
