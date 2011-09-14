@@ -93,6 +93,25 @@ article
   &.current
     left: 5%
 
+.notes
+  width: 84%
+  position: fixed
+  top: 2%
+  left: 5%
+  display: none
+  z-index: 1000
+  padding: 2%
+  background-color: rgba(0, 0, 0, 0.9)
+  font-size: 16px
+  color: #fff
+  box-shadow: 0 0 5px #000
+  line-height: 1.2em
+
+  ul
+    list-style: disc
+    padding-left: 1em
+
+
 h1, h2, h3, h4
   text-align: center
   display: table-cell
@@ -109,6 +128,30 @@ h3
 
 h4
   font-size: 6em
+
+.preview
+  article
+    -webkit-transition: none
+
+    &.current
+      left: -999%
+      .notes
+        display: block
+
+    &.next
+      left: 5%
+      -webkit-transform: scale(0.5) translate(40%, 60%)
+      &::before
+        content: "next slide:"
+        position: absolute
+        top: 50%
+        left: -50%
+        font-size: 40px
+        text-shadow: 0 1px 1px #fff
+        color: #505050
+    &.prev
+      .notes
+        display: none
 
 #expose
   article
