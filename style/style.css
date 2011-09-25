@@ -1,0 +1,161 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
+figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
+
+q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+b {
+  font-weight: bold; }
+
+input[type=checkbox], select {
+  margin-left: 0; }
+
+select {
+  font-size: 12px; }
+
+html, body {
+  width: auto;
+  height: 100%;
+  overflow: hidden;
+  background: -webkit-linear-gradient(top, #eeeeee, #cccccc) 0 0;
+  font-family: Helvetica; }
+
+article {
+  margin: 2%;
+  height: 88%;
+  width: 88%;
+  box-shadow: 0 0.4em 1em #999999;
+  background-color: white;
+  padding: 1%;
+  border-radius: 0.5em; }
+  article.prev, article.current, article.next, article.before-prev, article.after-next {
+    position: absolute;
+    display: table;
+    top: 2%;
+    left: -88%;
+    margin: 2% 0;
+    -webkit-transition-property: left;
+    -webkit-transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-in; }
+  article.current {
+    left: 5%; }
+  article.next {
+    left: 98%; }
+  article.before-prev {
+    left: -181%; }
+  article.after-next {
+    left: 191%; }
+  article.current {
+    left: 5%; }
+
+.notes {
+  width: 84%;
+  position: fixed;
+  top: 2%;
+  left: 5%;
+  display: none;
+  z-index: 1000;
+  padding: 2%;
+  background-color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  color: white;
+  box-shadow: 0 0 5px black;
+  line-height: 1.2em; }
+  .notes ul {
+    list-style: disc;
+    padding-left: 1em; }
+
+h1, h2, h3, h4 {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 10em;
+  font-weight: bold;
+  letter-spacing: -0.04em; }
+
+h2 {
+  font-size: 8em; }
+
+h3 {
+  font-size: 7em; }
+
+h4 {
+  font-size: 6em; }
+
+.preview article {
+  -webkit-transition: none; }
+  .preview article.current {
+    left: -999%; }
+    .preview article.current .notes {
+      display: block; }
+  .preview article.next {
+    left: 5%;
+    -webkit-transform: scale(0.5) translate(40%, 60%); }
+    .preview article.next::before {
+      content: "next slide:";
+      position: absolute;
+      top: 50%;
+      left: -50%;
+      font-size: 40px;
+      text-shadow: 0 1px 1px white;
+      color: #505050; }
+  .preview article.prev .notes {
+    display: none; }
+
+#expose article {
+  height: 88%;
+  width: 88%;
+  padding: 1%;
+  border-radius: 0.5em;
+  -webkit-transform: scale(0.1); }
+  #expose article.prev, #expose article.current, #expose article.next, #expose article.before-prev, #expose article.after-next {
+    display: table;
+    margin: 2% 0;
+    -webkit-transition-property: left;
+    -webkit-transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-in;
+    float: left; }
+  #expose article.current {
+    left: 5%; }
+  #expose article.next {
+    left: 98%; }
+  #expose article.before-prev {
+    left: -181%; }
+  #expose article.after-next {
+    left: 191%; }
