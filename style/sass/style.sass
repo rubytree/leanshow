@@ -1,3 +1,32 @@
+=transition($params)
+  -webkit-transition: $params
+  -moz-transition: $params
+  -o-transition: $params
+  -ms-transition: $params
+  transition: $params
+
+=transform($params)
+  -webkit-transform: $params
+  -moz-transform: $params
+  -o-transform: $params
+  -ms-transform: $params
+  transform: $params
+
+=box_gradient($top,$bottom)
+  background-image: -moz-linear-gradient(top, $top, $bottom)
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $top),color-stop(1, $bottom))
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=$top, EndColorStr=$bottom)
+
+=box_shadow($params)
+  box-shadow: $params
+  -webkit-box-shadow: $params
+  -moz-box-shadow: $params
+
+=border_radius($params)
+  border-radius: $params
+  -webkit-border-radius: $params
+  -moz-border-radius: $params
+
 /* http://meyerweb.com/eric/tools/css/reset/
  * v2.0 | 20110126
  * License: none (public domain)
@@ -57,17 +86,17 @@ html, body
   width: auto
   height: 100%
   overflow: hidden
-  background: -webkit-linear-gradient(top, #eee, #ccc) 0 0
+  +box_gradient(#eee, #ccc)
   font-family: Helvetica
 
 article
   margin: 2%
   height: 88%
   width: 88%
-  box-shadow: 0 0.4em 1em #999 
+  +box_shadow( 0 0.4em 1em #999 )
   background-color: #fff
   padding: 1%
-  border-radius: 0.5em
+  +border_radius(0.5em)
   position: absolute
   top: -200%
 
@@ -75,13 +104,12 @@ article
     position: absolute
     display: table
     top: 2%
-    left: -88%
+    left: -86%
     margin: 2% 0
-    -webkit-transition-property: left
-    -webkit-transition-duration: 0.5s
-    -webkit-transition-timing-function: ease-in
+    +transition(left 0.3s ease-in-out)
+
   &.current
-    left: 5%
+    left: 6%
 
   &.next
     left: 98%
@@ -91,9 +119,6 @@ article
 
   &.after-next
     left: 191%
-
-  &.current
-    left: 5%
 
 .notes
   width: 84%
@@ -106,18 +131,19 @@ article
   background-color: rgba(0, 0, 0, 0.9)
   font-size: 16px
   color: #fff
-  box-shadow: 0 0 5px #000
+  +box_shadow(0 0 5px #000)
   line-height: 1.2em
 
   ul
     list-style: disc
     padding-left: 1em
 
+.center
+  display: table-cell
+  vertical-align: middle
 
 h1, h2, h3, h4
   text-align: center
-  display: table-cell
-  vertical-align: middle
   font-size: 10em
   font-weight: bold
   letter-spacing: -0.04em
@@ -142,7 +168,7 @@ h4
 
     &.next
       left: 5%
-      -webkit-transform: scale(0.5) translate(40%, 60%)
+      +transform(scale(0.5) translate(40%, 60%))
       &::before
         content: "next slide:"
         position: absolute
@@ -155,29 +181,3 @@ h4
       .notes
         display: none
 
-#expose
-  article
-    height: 88%
-    width: 88%
-    padding: 1%
-    border-radius: 0.5em
-    -webkit-transform: scale(0.1)
-
-    &.prev, &.current, &.next, &.before-prev, &.after-next
-      display: table
-      margin: 2% 0
-      -webkit-transition-property: left
-      -webkit-transition-duration: 0.5s
-      -webkit-transition-timing-function: ease-in
-      float: left
-    &.current
-      left: 5%
-
-    &.next
-      left: 98%
-
-    &.before-prev
-      left: -181%
-
-    &.after-next
-      left: 191%

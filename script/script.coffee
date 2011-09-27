@@ -81,13 +81,23 @@ Leanshow = ->
     refreshClasses()
     return undefined
 
+  fixVerticalAlign = ->
+    detachedSlides = slides.detach()
+    detachedSlides.each ->
+      $(this)
+        .children()
+        .wrapAll('<div class="center">')
+    detachedSlides.appendTo('body')
+      
+
   if not previewMode?
     document.addEventListener('keyup', keyupHandler)
   else
     document.title = "Presenter View"
 
   $(window).bind 'hashchange', locationChangeHandler
-
+  
+  fixVerticalAlign()
   locationChangeHandler()
   return undefined
 

@@ -1,7 +1,7 @@
 (function() {
   var Leanshow;
   Leanshow = function() {
-    var current, keyupHandler, locationChangeHandler, nextSlide, openPresenterView, presenterView, previewMode, previousSlide, refreshClasses, slides;
+    var current, fixVerticalAlign, keyupHandler, locationChangeHandler, nextSlide, openPresenterView, presenterView, previewMode, previousSlide, refreshClasses, slides;
     slides = $('article');
     current = void 0;
     previewMode = void 0;
@@ -76,12 +76,21 @@
       }
       refreshClasses();
     };
+    fixVerticalAlign = function() {
+      var detachedSlides;
+      detachedSlides = slides.detach();
+      detachedSlides.each(function() {
+        return $(this).children().wrapAll('<div class="center">');
+      });
+      return detachedSlides.appendTo('body');
+    };
     if (!(previewMode != null)) {
       document.addEventListener('keyup', keyupHandler);
     } else {
       document.title = "Presenter View";
     }
     $(window).bind('hashchange', locationChangeHandler);
+    fixVerticalAlign();
     locationChangeHandler();
   };
   $(function() {
