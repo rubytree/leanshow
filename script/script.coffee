@@ -90,7 +90,7 @@ Leanshow = ->
     detachedSlides.appendTo('body')
       
 
-  if not previewMode?
+  if previewMode == undefined
     document.addEventListener('keyup', keyupHandler)
   else
     document.title = "Presenter View"

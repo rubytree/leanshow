@@ -84,7 +84,7 @@
       });
       return detachedSlides.appendTo('body');
     };
-    if (!(previewMode != null)) {
+    if (previewMode === void 0) {
       document.addEventListener('keyup', keyupHandler);
     } else {
       document.title = "Presenter View";

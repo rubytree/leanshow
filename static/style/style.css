@@ -132,10 +132,10 @@ h4 {
 
 .preview article {
   -webkit-transition: none; }
-  .preview article.current {
+  .preview article.current, .preview article.prev, .preview article.before-prev, .preview article.after-next {
     left: -999%; }
-    .preview article.current .notes {
-      display: block; }
+  .preview article.current .notes {
+    display: block; }
   .preview article.next {
     left: 5%;
     -webkit-transform: scale(0.5) translate(40%, 60%);
@@ -151,5 +151,5 @@ h4 {
       font-size: 40px;
       text-shadow: 0 1px 1px white;
       color: #505050; }
-  .preview article.prev .notes {
+  .preview article.prev .notes, .preview article.next .notes {
     display: none; }
